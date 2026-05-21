@@ -36,4 +36,11 @@ const jobSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+jobSchema.pre('save', function (next) {
+    if (!this.needCreator && !this.needInfluencer) {
+        return next(new Error('At least one of needCreator or needInfluencer must be true'));
+    }
+    next();
+})
+
 module.exports = mongoose.model("Job", jobSchema);
