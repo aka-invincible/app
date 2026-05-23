@@ -100,5 +100,5 @@ const getJobs = async (req, res) => {
 }
 
 module.exports = {
-    createJob
+    createJob, getJobs
 }
