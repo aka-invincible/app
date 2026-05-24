@@ -58,6 +58,73 @@ const applyToJob = async (req, res) => {
     }
 };
 
+const getApplicationByJob = async (req, res) => {
+    try {
+        const { jobId } = req.params;
+        const { type } = req.query;
+
+        // Validate Job Id
+        if (!jobId || !mongoose.Types.ObjectId.isValid(jobId)) {
+            return res.status(400).json({ message: "Invalid Job ID" });
+        }
+
+        // match stage
+        let matchStage = {
+            jobId: mongoose.Types.ObjectId(jobId)
+        }
+
+        if (type && ['creator', 'influencer'].includes(type)) {
+            matchStage.type = type;
+        }
+
+        const applications = await Application.aggregate([
+            { $match: matchStage },
+
+            // Lookup to get user details
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+
+            // Convert array → object
+            { $unwind: "$user" },
+
+            // Project only necessary fields
+            {
+                $project: {
+                    _id: 1,
+                    type: 1,
+                    status: 1,
+                    proposal: 1,
+                    portfolioLinks: 1,
+                    socialStats: 1,
+                    createdAt: 1,
+
+                    "user._id": 1,
+                    "user.name": 1,
+                    "user.bio": 1,
+                    "user.skills": 1,
+                    "user.niche": 1,
+                    "user.socialLinks": 1
+                }
+            },
+            //Sort latest first
+            { $sort: { createdAt: -1 } }
+
+
+        ]);
+
+        res.status(200).json(applications);
+    } catch (err) {
+        res.status(500).json({ message: "Server error" });
+    }
+}
+
 module.exports = {
-    applyToJob
+    applyToJob,
+    getApplicationsByJob
 }
