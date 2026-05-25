@@ -119,4 +119,23 @@ const logoutUser = (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, logoutUser };
+const getMe = async (req, res) => {
+    try {
+        // user is already attached by auth middleware
+        if (!req.user) {
+            return res.status(401).json({ message: "Not authorized" });
+        }
+
+        res.status(200).json({
+            _id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            role: req.user.role
+        });
+
+    } catch (err) {
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+module.exports = { registerUser, loginUser, logoutUser, getMe };
