@@ -19,4 +19,7 @@ router.get("/", protect, getJobs);
 // Single job
 router.get("/:id", protect, getJobById);
 
+// View my jobs (business only)
+router.get("/my", protect, authorizeRoles("business"), getMyJobs);
+
 module.exports = router;

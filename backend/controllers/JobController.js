@@ -117,6 +117,15 @@ const getJobById = async (req, res) => {
     }
 }
 
+const getMyJobs = async (req, res) => {
+    try {
+        const jobs = await Job.find({ createdBy: req.user._id });
+        res.json(jobs);
+    } catch {
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
 module.exports = {
-    createJob, getJobs, getJobById
+    createJob, getJobs, getJobById, getMyJobs
 }
