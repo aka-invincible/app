@@ -21,7 +21,7 @@ export default function Login() {
                 body: JSON.stringify(form)
             });
 
-            router.push("/dashboard");
+            router.push("/main/dashboard");
         } catch (err) {
             alert(err.message);
         }

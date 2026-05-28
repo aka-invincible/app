@@ -9,7 +9,7 @@ export default function Register() {
         name: "",
         email: "",
         password: "",
-        role="creator"
+        role: "creator"
     });
 
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            await fetchAPI("/auth.register", {
+            await fetchAPI("/auth/register", {
                 method: "POST",
                 body: JSON.stringify(form)
             });
