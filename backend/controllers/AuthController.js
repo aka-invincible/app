@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const generateToken = require('..utils/jwt');
+const generateToken = require('../utils/jwt');
 
 const registerUser = async (req, res) => {
     try {
@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
         }
 
         // Normalize the email before searching to avoid case-sensitivity issues
-        const normalizedEmail = email.lowerCase();
+        const normalizedEmail = email.toLowerCase();
         const user = await User.findOne({ email: normalizedEmail });
 
         // If the user is not found, return a 404 response
