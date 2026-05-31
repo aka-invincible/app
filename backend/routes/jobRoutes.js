@@ -8,8 +8,7 @@ const {
     getMyJobs
 } = require("../controllers/jobController");
 
-const protect = require("../middlewares/AuthMiddleware");
-const authorizeRoles = require("../middlewares/AuthMiddleware");
+const { protect, authorizeRoles } = require("../middlewares/AuthMiddleware");
 
 // Create job (business only)
 router.post("/", protect, authorizeRoles("business"), createJob);

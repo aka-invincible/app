@@ -6,8 +6,7 @@ const {
     getApplicationsByJob
 } = require("../controllers/applicationController");
 
-const protect = require("../middlewares/AuthMiddleware");
-const authorizeRoles = require("../middlewares/AuthMiddleware");
+const { protect, authorizeRoles } = require("../middlewares/AuthMiddleware");
 
 // Apply to job
 router.post("/", protect, applyToJob);

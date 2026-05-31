@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Application = require('../models/Application.js');
 const Job = require('../models/Jobs');
 
@@ -59,7 +60,7 @@ const applyToJob = async (req, res) => {
     }
 };
 
-const getApplicationByJob = async (req, res) => {
+const getApplicationsByJob = async (req, res) => {
     try {
         const { jobId } = req.params;
         const { type } = req.query;
