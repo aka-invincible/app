@@ -16,12 +16,16 @@ export default function Login() {
         try {
             e.preventDefault();
 
-            await fetchAPI("/auth/login", {
+            const user = await fetchAPI("/auth/login", {
                 method: "POST",
                 body: JSON.stringify(form)
             });
 
-            router.push("/main/dashboard");
+            if (user?.role === "business") {
+                router.push("/business/dashboard");
+            } else {
+                router.push("/user/jobs");
+            }
         } catch (err) {
             alert(err.message);
         }

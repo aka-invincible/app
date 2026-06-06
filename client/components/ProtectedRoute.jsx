@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
                 router.push("/unauthorized");
             }
         }
-    }, [user, loading]);
+    }, [user, loading, router, allowedRoles]);
 
     if (loading) {
         return (

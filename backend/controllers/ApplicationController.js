@@ -16,8 +16,8 @@ const applyToJob = async (req, res) => {
             return res.status(400).json({ message: "Invalid application type" });
         }
 
-        //  Role validation
-        if (req.user.role === "business" || req.user.role !== type) {
+        //  Role validation: user role must match applicant type and business users cannot apply
+        if (req.user.role !== type) {
             return res.status(403).json({ message: "You are not allowed to apply for this role" });
         }
 
@@ -56,7 +56,8 @@ const applyToJob = async (req, res) => {
             return res.status(400).json({ message: "You have already applied to this job" });
         }
 
-        res.status(500).json({ message: "Server error" });
+        console.error('ApplyToJob error:', err);
+        res.status(500).json({ message: err.message || "Server error" });
     }
 };
 
@@ -122,7 +123,8 @@ const getApplicationsByJob = async (req, res) => {
 
         res.status(200).json(applications);
     } catch (err) {
-        res.status(500).json({ message: "Server error" });
+        console.error('GetApplicationsByJob error:', err);
+        res.status(500).json({ message: err.message || "Server error" });
     }
 }
 

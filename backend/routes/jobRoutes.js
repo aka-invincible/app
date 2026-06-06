@@ -6,7 +6,7 @@ const {
     getJobs,
     getJobById,
     getMyJobs
-} = require("../controllers/jobController");
+} = require("../controllers/JobController");
 
 const { protect, authorizeRoles } = require("../middlewares/AuthMiddleware");
 

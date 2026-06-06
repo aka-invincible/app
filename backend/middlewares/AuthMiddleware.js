@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+const jwtSecret = process.env.JWT_SECRET || 'defaultsecret';
+
 const protect = async (req, res, next) => {
     try {
         const token = req.cookies.token;
@@ -8,7 +10,7 @@ const protect = async (req, res, next) => {
             return res.status(401).json({ message: "Not authorized, no token" });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, jwtSecret);
         const user = await User.findById(decoded.id).select('-password');
 
         if (!user) {
@@ -22,15 +24,15 @@ const protect = async (req, res, next) => {
 }
 
 const authorizeRoles = (...roles) => {
-    try {
-        return (req, res, next) => {
+    return (req, res, next) => {
+        try {
             if (!roles.includes(req.user.role)) {
                 return res.status(403).json({ message: "Forbidden" });
             }
             next();
+        } catch (err) {
+            return res.status(500).json({ message: "Server error" });
         }
-    } catch (err) {
-        return res.status(500).json({ message: "Server error" });
     }
 }
 

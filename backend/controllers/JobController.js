@@ -52,8 +52,8 @@ const createJob = async (req, res) => {
         await newJob.save();
         res.status(201).json(newJob);
     } catch (err) {
-        // Log the error server-side if needed, and return generic message
-        res.status(500).json({ message: "Server error" });
+        console.error('CreateJob error:', err);
+        res.status(500).json({ message: err.message || "Server error" });
     }
 }
 
@@ -95,6 +95,7 @@ const getJobs = async (req, res) => {
         res.status(200).json(jobs);
 
     } catch (err) {
+        console.error('GetJobs error:', err);
         res.status(500).json({ message: "Server error" });
     }
 }
@@ -113,6 +114,7 @@ const getJobById = async (req, res) => {
         }
         res.status(200).json(job);
     } catch (err) {
+        console.error('GetJobById error:', err);
         res.status(500).json({ message: "Server error" });
     }
 }
@@ -121,7 +123,8 @@ const getMyJobs = async (req, res) => {
     try {
         const jobs = await Job.find({ createdBy: req.user._id });
         res.json(jobs);
-    } catch {
+    } catch (err) {
+        console.error('GetMyJobs error:', err);
         res.status(500).json({ message: "Server error" });
     }
 };

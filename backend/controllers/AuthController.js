@@ -3,6 +3,7 @@ const generateToken = require('../utils/jwt');
 
 const registerUser = async (req, res) => {
     try {
+        console.log('1. Register endpoint called');
         const { name, email, password, role } = req.body;
         if (!name || !email || !password || !role) {
             return res.status(400).json({ message: 'All fields are required.' });
@@ -22,6 +23,7 @@ const registerUser = async (req, res) => {
         // Normalize email
         const normalizedEmail = email.toLowerCase();
 
+        console.log('2. Checking if user exists');
         const userExists = await User.findOne({ email: normalizedEmail });
 
         if (userExists) {
@@ -29,6 +31,7 @@ const registerUser = async (req, res) => {
         }
 
         // Create user
+        console.log('3. Creating user in database');
         const user = await User.create({
             name,
             email: normalizedEmail,
@@ -36,6 +39,7 @@ const registerUser = async (req, res) => {
             password
         });
 
+        console.log('4. User created, generating token');
         // Generate Token
         const token = generateToken(user._id);
 
@@ -43,7 +47,7 @@ const registerUser = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            samesite: "lax"
+            sameSite: "lax"
         });
 
         // Response without password
@@ -51,25 +55,23 @@ const registerUser = async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            role: user.name
+            role: user.role
         });
 
     } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error('Registration error:', error.message, error.stack);
+        res.status(500).json({ message: error.message || "Server error" });
     }
 }
 
 const loginUser = async (req, res) => {
     try {
-        // Extract the expected login fields from the request body
-        const { name, email, password, role } = req.body;
+        const { email, password } = req.body;
 
-        // Basic validation: ensure all required fields are present
-        if (!name || !email || !password || !role) {
-            return res.status(400).json({ message: 'All fields are required.' });
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required.' });
         }
 
-        // Normalize the email before searching to avoid case-sensitivity issues
         const normalizedEmail = email.toLowerCase();
         const user = await User.findOne({ email: normalizedEmail });
 
@@ -91,10 +93,9 @@ const loginUser = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            samesite: "lax"
+            sameSite: "lax"
         });
 
-        // Return user information (excluding sensitive fields)
         res.status(200).json({
             _id: user.id,
             name: user.name,
@@ -102,8 +103,8 @@ const loginUser = async (req, res) => {
             role: user.role
         });
     } catch (err) {
-        // Catch any unexpected server errors and return a generic message
-        res.status(500).json({ message: 'Server error' });
+        console.error('Login error:', err.message, err.stack);
+        res.status(500).json({ message: err.message || 'Server error' });
     }
 }
 
@@ -115,6 +116,7 @@ const logoutUser = (req, res) => {
         });
         res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {
+        console.error('Logout error:', err);
         res.status(500).json({ message: 'Server error' });
     }
 }
@@ -134,7 +136,8 @@ const getMe = async (req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({ message: "Server error" });
+        console.error('GetMe error:', err);
+        res.status(500).json({ message: 'Server error' });
     }
 };
 
