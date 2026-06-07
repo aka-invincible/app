@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 
 export default async function JobsPage() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookieString = Array.from(cookieStore).map(([name, value]) => `${name}=${value}`).join('; ');
 
     const res = await fetch(`http://localhost:5000/api/jobs`, {
