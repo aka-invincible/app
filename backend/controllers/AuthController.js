@@ -46,8 +46,9 @@ const registerUser = async (req, res) => {
         // Send cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "none",
+            path: "/"
         });
 
         // Response without password
@@ -92,8 +93,9 @@ const loginUser = async (req, res) => {
         // Store token in an HTTP-only cookie for client-side usage
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "none",
+            path: "/"
         });
 
         res.status(200).json({
@@ -112,7 +114,9 @@ const logoutUser = (req, res) => {
     try {
         res.cookie("token", "", {
             httpOnly: true,
-            expires: new Date(0)
+            expires: new Date(0),
+            sameSite: "none",
+            path: "/"
         });
         res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {
