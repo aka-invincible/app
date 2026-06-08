@@ -5,7 +5,7 @@ import useAuth from "@/hooks/useAuth";
 import Button from "@/components/ui/Button";
 
 export default function Navbar() {
-  const { user } = useAuth() || {};
+  const { user, logout } = useAuth() || {};
 
   return (
     <header className="w-full border-b border-slate-200 bg-white/85 backdrop-blur-xl shadow-sm dark:border-slate-700 dark:bg-slate-950/90">
@@ -34,7 +34,10 @@ export default function Navbar() {
               </Link>
             </>
           ) : (
-            <span className="text-sm text-slate-600 dark:text-slate-300">Hello, {user.name || user.email}</span>
+            <>
+              <span className="text-sm text-slate-600 dark:text-slate-300">Hello, {user.name || user.email}</span>
+              <Button className="text-sm" variant="ghost" onClick={logout}>Logout</Button>
+            </>
           )}
         </nav>
       </div>

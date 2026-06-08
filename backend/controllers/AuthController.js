@@ -112,9 +112,9 @@ const loginUser = async (req, res) => {
 
 const logoutUser = (req, res) => {
     try {
-        res.cookie("token", "", {
+        res.clearCookie("token", {
             httpOnly: true,
-            expires: new Date(0),
+            secure: process.env.NODE_ENV === 'production',
             sameSite: "none",
             path: "/"
         });

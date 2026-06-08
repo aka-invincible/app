@@ -9,8 +9,6 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-
-
     useEffect(() => {
         const checkAuth = async () => {
             try {
@@ -25,8 +23,20 @@ export const AuthProvider = ({ children }) => {
         checkAuth();
     }, []);
 
+    const logout = async () => {
+        try {
+            await fetchAPI("/auth/logout", {
+                method: "POST"
+            });
+        } catch (err) {
+            console.error("Logout failed:", err);
+        } finally {
+            setUser(null);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, setUser, loading }}>
+        <AuthContext.Provider value={{ user, setUser, loading, logout }}>
             {children}
         </AuthContext.Provider>
     )
