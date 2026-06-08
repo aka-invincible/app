@@ -14,13 +14,13 @@ export default async function JobsPage() {
     const jobs = Array.isArray(data) ? data : data.jobs || [];
     return (
         <div className="mx-auto max-w-4xl">
-            <h1 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-gray-100">Jobs</h1>
+            <h1 className="mb-6 text-3xl font-semibold text-slate-900 dark:text-slate-100">Jobs</h1>
 
             <div className="grid gap-4">
                 {jobs.map(job => (
-                    <a key={job._id} href={`/user/jobs/${job._id}`} className="block rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-                        <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{job.title}</h2>
-                        <p className="mt-2 text-gray-600 dark:text-gray-300">{job.description}</p>
+                    <a key={job._id} href={`/user/jobs/${job._id}`} className="block rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+                        <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{job.title}</h2>
+                        <p className="mt-2 text-slate-600 dark:text-slate-300">{job.description}</p>
                     </a>
                 ))}
             </div>

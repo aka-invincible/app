@@ -17,11 +17,11 @@ export default async function UserPage() {
 	if (!user) {
 		return (
 			<div className="mx-auto max-w-3xl">
-				<div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
-					<h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">Profile</h1>
-					<p className="mt-4 text-gray-700 dark:text-gray-300">You are not signed in.</p>
+				<div className="rounded-[1.75rem] border border-slate-200 bg-white/95 p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+					<h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Profile</h1>
+					<p className="mt-4 text-slate-700 dark:text-slate-300">You are not signed in.</p>
 					<div className="mt-6">
-						<Link href="/auth/login" className="rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-700">Sign in</Link>
+						<Link href="/auth/login" className="inline-flex rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-700">Sign in</Link>
 					</div>
 				</div>
 			</div>
@@ -30,13 +30,13 @@ export default async function UserPage() {
 
 	return (
 		<div className="mx-auto max-w-3xl">
-			<div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
-				<h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">Profile</h1>
-				<p className="mt-4 text-gray-700 dark:text-gray-300">Name: {user.name}</p>
-				<p className="text-gray-700 dark:text-gray-300">Email: {user.email}</p>
-				<p className="text-gray-700 dark:text-gray-300">Role: {user.role}</p>
+			<div className="rounded-[1.75rem] border border-slate-200 bg-white/95 p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+				<h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Profile</h1>
+				<p className="mt-4 text-slate-700 dark:text-slate-300">Name: {user.name}</p>
+				<p className="text-slate-700 dark:text-slate-300">Email: {user.email}</p>
+				<p className="text-slate-700 dark:text-slate-300">Role: {user.role}</p>
 				<div className="mt-6">
-					<Link href="/user/jobs" className="rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-700">View Jobs</Link>
+					<Link href="/user/jobs" className="inline-flex rounded-full bg-teal-600 px-4 py-2 text-white transition hover:bg-teal-700">View Jobs</Link>
 				</div>
 			</div>
 		</div>

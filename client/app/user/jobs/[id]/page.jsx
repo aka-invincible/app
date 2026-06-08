@@ -35,17 +35,17 @@ export default function JobDetail() {
 
     return (
         <div className="mx-auto max-w-3xl">
-            <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
-                <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{job?.title || 'Loading...'}</h1>
-                <p className="mt-4 text-gray-700 dark:text-gray-300">{job?.description}</p>
+            <div className="rounded-[1.75rem] border border-slate-200 bg-white/95 p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+                <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{job?.title || 'Loading...'}</h1>
+                <p className="mt-4 text-slate-700 dark:text-slate-300">{job?.description}</p>
 
-                <div className="mt-6 flex items-center gap-4">
-                    <select value={type} onChange={(e) => setType(e.target.value)} className="rounded-md border border-gray-200 px-3 py-2 dark:bg-gray-700 dark:border-gray-600">
+                <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <select value={type} onChange={(e) => setType(e.target.value)} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                         <option value="creator">Creator</option>
                         <option value="influencer">Influencer</option>
                     </select>
 
-                    <button onClick={apply} className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">Apply</button>
+                    <button onClick={apply} className="rounded-full bg-teal-600 px-5 py-3 text-white shadow-lg transition hover:bg-teal-700">Apply</button>
                 </div>
             </div>
         </div>

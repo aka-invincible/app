@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ecfeff;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --border: #d9f9f5;
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
 }
 
 @theme inline {
@@ -16,8 +21,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #031e1c;
+    --foreground: #ecfeff;
+    --surface: #0f172a;
+    --surface-muted: #122f2d;
+    --border: #0f766e;
+    --primary: #14b8a6;
+    --primary-hover: #0f766e;
   }
 }
 
@@ -29,36 +39,34 @@ body {
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium shadow-sm;
+    @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold shadow-lg transition duration-200 ease-out;
   }
 
   .btn-primary {
-    @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+    @apply bg-teal-600 text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500;
   }
 
   .btn-ghost {
-    @apply bg-transparent text-indigo-600 hover:underline;
+    @apply bg-transparent text-teal-700 hover:text-teal-800 hover:underline dark:text-teal-300;
   }
 
   .card {
-    @apply rounded-lg bg-white p-6 shadow-md dark:bg-gray-800;
+    @apply rounded-[2rem] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur dark:border-slate-700 dark:bg-slate-900/90;
   }
 
   .form-input {
-    @apply w-full rounded-md border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600;
+    @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm transition duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
   }
 }
 
-/* Utility tweaks */
 .container {
   max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
-/* Smooth background transition when toggling dark mode */
 html,
 body {
   transition:

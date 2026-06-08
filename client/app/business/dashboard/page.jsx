@@ -36,42 +36,42 @@ export default function Dashboard() {
     }, [selectedJob])
 
     return (
-        <div className="mx-auto grid max-w-6xl grid-cols-3 gap-6">
-            <div className="col-span-1 rounded-lg bg-white p-4 shadow-sm dark:bg-gray-800">
-                <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Your Jobs</h2>
-                <div className="flex flex-col gap-2">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
+            <section className="rounded-[1.75rem] border border-slate-200 bg-white/95 p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+                <h2 className="mb-4 text-xl font-semibold text-slate-900 dark:text-slate-100">Your Jobs</h2>
+                <div className="flex flex-col gap-3">
                     {jobs.map(job => (
-                        <button key={job._id} onClick={() => setSelectedJob(job)} className="w-full rounded-md px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <button key={job._id} onClick={() => setSelectedJob(job)} className="w-full rounded-2xl px-4 py-3 text-left text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900/80">
                             {job.title}
                         </button>
                     ))}
                 </div>
-            </div>
+            </section>
 
-            <div className="col-span-2 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
-                <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Applicants</h2>
-                {!selectedJob && <p className="text-gray-600 dark:text-gray-300">Select a job to view applicants.</p>}
+            <section className="md:col-span-2 rounded-[1.75rem] border border-slate-200 bg-white/95 p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-950/95">
+                <h2 className="mb-4 text-xl font-semibold text-slate-900 dark:text-slate-100">Applicants</h2>
+                {!selectedJob && <p className="text-slate-600 dark:text-slate-300">Select a job to view applicants.</p>}
 
                 {selectedJob && (
                     <>
-                        <h3 className="mb-4 text-md font-medium text-gray-800 dark:text-gray-200">{selectedJob.title}</h3>
+                        <h3 className="mb-4 text-lg font-medium text-slate-800 dark:text-slate-200">{selectedJob.title}</h3>
                         <div className="flex flex-col gap-4">
-                            {apps.length === 0 && <p className="text-gray-600 dark:text-gray-300">No applicants yet.</p>}
+                            {apps.length === 0 && <p className="text-slate-600 dark:text-slate-300">No applicants yet.</p>}
                             {apps.map(app => (
-                                <div key={app._id} className="rounded-md border border-gray-100 p-4 dark:border-gray-700">
-                                    <div className="flex items-center justify-between">
+                                <div key={app._id} className="rounded-3xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/80">
+                                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
-                                            <p className="font-medium text-gray-900 dark:text-gray-100">{app.user?.name}</p>
-                                            <p className="text-sm text-gray-600 dark:text-gray-300">{app.type}</p>
+                                            <p className="font-medium text-slate-900 dark:text-slate-100">{app.user?.name}</p>
+                                            <p className="text-sm text-teal-700 dark:text-teal-300">{app.type}</p>
                                         </div>
                                     </div>
-                                    <p className="mt-2 text-gray-700 dark:text-gray-300">{app.proposal}</p>
+                                    <p className="mt-3 text-slate-700 dark:text-slate-300">{app.proposal}</p>
                                 </div>
                             ))}
                         </div>
                     </>
                 )}
-            </div>
+            </section>
         </div>
     );
 
