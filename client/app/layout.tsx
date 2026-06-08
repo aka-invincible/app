@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
         <AuthProvider>
           <Navbar />
-          <main className="mx-auto max-w-6xl p-6">{children}</main>
+          <main className="container">{children}</main>
         </AuthProvider>
       </body>
     </html>

@@ -26,3 +26,42 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium shadow-sm;
+  }
+
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-indigo-600 hover:underline;
+  }
+
+  .card {
+    @apply rounded-lg bg-white p-6 shadow-md dark:bg-gray-800;
+  }
+
+  .form-input {
+    @apply w-full rounded-md border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600;
+  }
+}
+
+/* Utility tweaks */
+.container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Smooth background transition when toggling dark mode */
+html,
+body {
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}

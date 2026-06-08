@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
+import Button from "@/components/ui/Button";
 
 export default function Navbar() {
   const { user } = useAuth() || {};
@@ -25,11 +26,11 @@ export default function Navbar() {
           </Link>
           {!user ? (
             <>
-              <Link href="/auth/login" className="rounded-md bg-indigo-600 px-3 py-1 text-sm text-white hover:bg-indigo-700">
-                Login
+              <Link href="/auth/login">
+                <Button className="text-sm" variant="primary">Login</Button>
               </Link>
-              <Link href="/auth/register" className="text-sm text-indigo-600 hover:underline">
-                Register
+              <Link href="/auth/register">
+                <Button className="text-sm" variant="ghost">Register</Button>
               </Link>
             </>
           ) : (
