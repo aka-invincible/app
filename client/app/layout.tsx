@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 
