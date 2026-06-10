@@ -129,8 +129,8 @@ Create a `.env` file in the `server` directory:
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
+MONGO_URI=mongodb_uri
+JWT_SECRET=secret_key
 ```
 
 ---
@@ -164,10 +164,10 @@ npm run dev
 
 ## 📌 Key Highlights
 
-* 🔥 Role-based scalable architecture
-* 🔥 Clean and maintainable codebase
-* 🔥 Modern UI with Tailwind
-* 🔥 Separation of concerns (MVC)
+* Role-based scalable architecture
+* Clean and maintainable codebase
+* Modern UI with Tailwind
+* Separation of concerns (MVC)
 
 ---
 
