@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 export default async function UserPage() {
-	const cookieStore = cookies();
+	const cookieStore = await cookies();
 	const cookieString = Array.from(cookieStore).map(([name, value]) => `${name}=${value}`).join('; ');
 
 	const res = await fetch(`http://localhost:5000/api/auth/me`, {
