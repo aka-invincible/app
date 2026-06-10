@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchAPI } from "@/lib/fetchAPI";
+import useAuth from "@/hooks/useAuth";
 
 export default function Login() {
     const [form, setForm] = useState({
@@ -11,6 +12,7 @@ export default function Login() {
     });
 
     const router = useRouter();
+    const { setUser } = useAuth();
 
     const handleSubmit = async (e) => {
         try {
@@ -20,6 +22,8 @@ export default function Login() {
                 method: "POST",
                 body: JSON.stringify(form)
             });
+
+            setUser(user);
 
             if (user?.role === "business") {
                 router.push("/business/dashboard");

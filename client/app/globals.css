@@ -1,7 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* CSS variables */
 :root {
   --background: #ecfeff;
   --foreground: #0f172a;
@@ -10,14 +9,12 @@
   --border: #d9f9f5;
   --primary: #0d9488;
   --primary-hover: #0f766e;
-}
 
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
+
+/* REMOVED @theme inline (it breaks Tailwind) */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,12 +28,23 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* base styles */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  html,
+  body {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
 }
 
+/* components */
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold shadow-lg transition duration-200 ease-out;
@@ -59,17 +67,11 @@ body {
   }
 }
 
+/* container */
 .container {
   max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.25rem;
+  padding-left: 1.25rem; /* px-5 */
   padding-right: 1.25rem;
-}
-
-html,
-body {
-  transition:
-    background-color 150ms ease,
-    color 150ms ease;
 }
